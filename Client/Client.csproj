@@ -5,9 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="det-app\dist\**" />
     <Compile Remove="wwwroot\dist\**" />
+    <Content Remove="det-app\dist\**" />
     <Content Remove="wwwroot\dist\**" />
+    <EmbeddedResource Remove="det-app\dist\**" />
     <EmbeddedResource Remove="wwwroot\dist\**" />
+    <None Remove="det-app\dist\**" />
     <None Remove="wwwroot\dist\**" />
   </ItemGroup>
 
