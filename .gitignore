@@ -4,3 +4,5 @@
 
 /.vs
 /Main/ClientApp/.angular/cache/13.3.4
+/Client/bin/Debug/net6.0
+/Client/obj
