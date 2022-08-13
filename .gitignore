@@ -10,3 +10,5 @@
 /Client/bin/Debug/netcoreapp3.1
 /Client/det-app/.vscode
 /Client/wwwroot/dist
+/API/bin/Debug/net5.0
+/API/obj
