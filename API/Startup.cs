@@ -1,4 +1,3 @@
-using API.Factories;
 using API.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -25,7 +24,7 @@ namespace API
 
             services.AddSingleton(services => new HttpClient());
             services.AddSingleton(services => new AppSettings(configuration));
-            services.AddSingleton<IEncoderFactory, EncoderFactory>();
+            services.AddSingleton<IBase64Service, Base64Service>();
 
             services.AddScoped<IDocumentsService, DocumentsService>();
         }

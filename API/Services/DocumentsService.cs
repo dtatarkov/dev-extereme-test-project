@@ -1,6 +1,4 @@
 ﻿using API.DTO;
-using API.Factories;
-using API.Services.Encoders;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
@@ -18,18 +16,18 @@ namespace API.Services
         private readonly AppSettings appSettings;
         private readonly HttpClient httpClient;
         private readonly ILogger logger;
-        private readonly IEncoder base64Encoder;
+        private readonly IBase64Service base64Service;
 
         public DocumentsService(
             AppSettings appSettings, 
-            HttpClient httpClient, 
-            IEncoderFactory encoderFactory, 
+            HttpClient httpClient,
+            IBase64Service base64Service,
             ILogger logger)
         {
             this.appSettings = appSettings;
             this.httpClient = httpClient;
+            this.base64Service = base64Service;
             this.logger = logger;
-            this.base64Encoder = encoderFactory.GetBase64Encoder();
         }
 
         public async Task<IEnumerable<TderaDocument>> GetDocumentsAsync()
@@ -42,7 +40,7 @@ namespace API.Services
                     Method = HttpMethod.Get
                 };
 
-                var token = base64Encoder.Encode($"{appSettings.TderaSettings.Login}:{appSettings.TderaSettings.Password}");
+                var token = base64Service.Encode($"{appSettings.TderaSettings.Login}:{appSettings.TderaSettings.Password}");
                 request.Headers.Authorization = new AuthenticationHeaderValue("Basic", token);
 
                 var response = await httpClient.SendAsync(request);

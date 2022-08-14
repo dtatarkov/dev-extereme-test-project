@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace API.Services.Encoders
+namespace API.Services
 {
-    public class Base64Encoder : IEncoder
+    public class Base64Service: IBase64Service
     {
         public string Encode(string value)
         {
@@ -17,7 +17,7 @@ namespace API.Services.Encoders
         public string Decode(string value)
         {
             var base64EncodedBytes = Convert.FromBase64String(value);
-            return Encoding.UTF8.GetString(base64EncodedBytes);            
-        }        
+            return Encoding.UTF8.GetString(base64EncodedBytes);
+        }
     }
 }
