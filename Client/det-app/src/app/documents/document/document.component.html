@@ -9,7 +9,7 @@
       <dxo-row-dragging group="documentGrid" [onAdd]="onItemAdd" [onRemove]="onItemRemove"></dxo-row-dragging>
     </dx-data-grid>
 
-    <dx-data-grid [dataSource]="selectedItemsSource.items" [focusedRowEnabled]="true" keyExpr="id_pos">
+    <dx-data-grid [dataSource]="selectedItemsSource.items" keyExpr="id_pos" [focusedRowEnabled]="true">
       <dxo-row-dragging group="documentGrid" [onAdd]="onSelectedItemAdd" [onRemove]="onSelectedItemRemove"></dxo-row-dragging>
     </dx-data-grid>
   </div>
