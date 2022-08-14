@@ -1,1 +1,19 @@
-﻿
+:host {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+}
+
+.app-documents-list__body {
+  
+}
+
+.app-documents-list__spinner {
+    align-self: center;
+}
+
+.app-documents-list__alert {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}

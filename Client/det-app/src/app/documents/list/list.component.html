@@ -1,1 +1,10 @@
-<dx-data-grid [dataSource]="documents" keyExpr="id_record"></dx-data-grid>
+<div class="app-documents-list__body" *ngIf="isReady">
+  <div class="app-documents-list__alert alert alert-warning" role="alert" *ngIf="isMessageShown">
+    <span>Documents loading error!</span>
+    <button type="button" class="btn btn-primary btn-sm" (click)="loadDocuments()">Click here to try again!</button>
+  </div>
+
+  <dx-data-grid [dataSource]="documents" keyExpr="id_record" *ngIf="areDocumentsShown"></dx-data-grid>
+</div>
+
+<div class="app-documents-list__spinner spinner-border text-primary" role="status" *ngIf="!isReady"></div>
