@@ -24,6 +24,7 @@ export class DocumentComponent {
   private id: number
 
   items = new Array<TderaDocumentItem>();
+  selectedItems = new Array<TderaDocumentItem>();
 
   get areItemsShown() {
     return this.view == DocumentComponentView.documents
@@ -42,6 +43,26 @@ export class DocumentComponent {
     private documentsService: DocumentsService
   ) {
     this.id = parseInt(route.snapshot.paramMap.get('id')!, 10);
+  }
+
+  onItemAdd = (e: any) => {
+    const item: TderaDocumentItem = e.itemData;
+    this.items = [...this.items, item];
+  }
+
+  onItemRemove = (e: any) => {
+    const targetItem: TderaDocumentItem = e.itemData;
+    this.items = this.items.filter(item => item != targetItem);
+  }
+
+  onSelectedItemAdd = (e: any) => {
+    const item: TderaDocumentItem = e.itemData;
+    this.selectedItems = [...this.selectedItems, item];
+  }
+
+  onSelectedItemRemove = (e: any) => {
+    const targetItem: TderaDocumentItem = e.itemData;
+    this.selectedItems = this.selectedItems.filter(item => item != targetItem);
   }
 
   loadItems() {
