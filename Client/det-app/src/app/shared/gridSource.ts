@@ -1,13 +1,11 @@
-export class DocumentGridSource<T> {
+export class GridSource<T> {
   private _items = new Array<T>();
 
   get items() {
     return this._items;
   }
 
-  constructor() {
-
-  }
+  constructor() { }
 
   add(item: T) {
     this._items = [...this._items, item];

@@ -2,9 +2,9 @@ import { Component } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { catchError, of } from "rxjs";
 import { EffectsContainer } from "src/app/shared/effectsContainer";
+import { GridSource } from "src/app/shared/gridSource";
 import { TderaDocumentItem } from "../documentItem";
 import { DocumentsService } from "../documents.service";
-import { DocumentGridSource } from "./gridSource";
 
 enum DocumentComponentView {
   none = 0,
@@ -24,8 +24,8 @@ export class DocumentComponent {
 
   private id: number
 
-  itemsSource = new DocumentGridSource<TderaDocumentItem>();
-  selectedItemsSource = new DocumentGridSource<TderaDocumentItem>();
+  itemsSource = new GridSource<TderaDocumentItem>();
+  selectedItemsSource = new GridSource<TderaDocumentItem>();
 
   get areItemsShown() {
     return this.view == DocumentComponentView.documents
