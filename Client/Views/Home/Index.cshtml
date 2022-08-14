@@ -1,6 +1,12 @@
 ﻿<app-root></app-root>
 
-<script type="text/javascript" asp-src-include="~/dist/runtime*.js"></script>
-<script type="text/javascript" asp-src-include="~/dist/polyfills*.js"></script>
-<script type="text/javascript" asp-src-include="~/dist/vendor*.js"></script>
-<script type="text/javascript" asp-src-include="~/dist/main*.js"></script>
+@section Styles {
+    <link rel="stylesheet" asp-href-include="~/dist/styles*.css" asp-append-version="true" />
+}
+
+@section Scripts {
+    <script type="text/javascript" asp-src-include="~/dist/runtime*.js"></script>
+    <script type="text/javascript" asp-src-include="~/dist/polyfills*.js"></script>
+    <script type="text/javascript" asp-src-include="~/dist/vendor*.js"></script>
+    <script type="text/javascript" asp-src-include="~/dist/main*.js"></script>
+}
