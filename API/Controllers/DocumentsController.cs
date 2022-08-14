@@ -23,5 +23,12 @@ namespace API.Controllers
         {
             return await documentsService.GetDocumentsAsync();
         }
+
+        [HttpGet]
+        [Route("~/api/v1/documents/{id}")]
+        public async Task<TderaDocumentDetails> Get(int id)
+        {
+            return await documentsService.GetDocumentDetailsByIdAsync(id);
+        }
     }
 }

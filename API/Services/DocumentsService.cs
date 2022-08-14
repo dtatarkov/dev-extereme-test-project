@@ -30,38 +30,42 @@ namespace API.Services
             this.logger = logger;
         }
 
-        public async Task<IEnumerable<TderaDocument>> GetDocumentsAsync()
+        public Task<IEnumerable<TderaDocument>> GetDocumentsAsync() => GetAsync<IEnumerable<TderaDocument>>("http://api-test.tdera.ru/api/getdocumentlist");
+
+        public Task<TderaDocumentDetails> GetDocumentDetailsByIdAsync(int id) => GetAsync<TderaDocumentDetails>($"http://api-test.tdera.ru/api/getdocument?id={id}");
+
+        private async Task<T> GetAsync<T>(string url)
         {
             try
             {
                 var request = new HttpRequestMessage()
                 {
-                    RequestUri = new Uri("http://api-test.tdera.ru/api/getdocumentlist"),
+                    RequestUri = new Uri(url),
                     Method = HttpMethod.Get
                 };
 
-                var token = base64Service.Encode($"{appSettings.TderaSettings.Login}:{appSettings.TderaSettings.Password}");
-                request.Headers.Authorization = new AuthenticationHeaderValue("Basic", token);
+                request.Headers.Authorization = GetAuthHeader();
 
                 var response = await httpClient.SendAsync(request);
-                var responseContent = JsonConvert.DeserializeObject<TderaAPIResponse<IEnumerable<TderaDocument>>>(await response.Content.ReadAsStringAsync());
+                var responseContentRaw = await response.Content.ReadAsStringAsync();
+                var responseContent = JsonConvert.DeserializeObject<TderaAPIResponse<T>>(responseContentRaw);
 
-                if (responseContent.exception.error_msg != null)
+                if (responseContent.exception?.error_msg != null)
                     throw new Exception(responseContent.exception.error_msg);
 
                 return responseContent.data;
             }
             catch (Exception ex)
             {
-                logger.LogError("Tdera API documents loading error", ex.Message);
+                logger.LogError("Tdera API error", ex.Message);
                 throw;
             }
         }
 
-        public static string Base64Encode(string plainText)
+        private AuthenticationHeaderValue GetAuthHeader()
         {
-            var plainTextBytes = Encoding.UTF8.GetBytes(plainText);
-            return Convert.ToBase64String(plainTextBytes);
+            var token = base64Service.Encode($"{appSettings.TderaSettings.Login}:{appSettings.TderaSettings.Password}");
+            return new AuthenticationHeaderValue("Basic", token);
         }
     }
 }

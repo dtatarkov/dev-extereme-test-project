@@ -7,5 +7,6 @@ namespace API.Services
     public interface IDocumentsService
     {
         Task<IEnumerable<TderaDocument>> GetDocumentsAsync();
+        Task<TderaDocumentDetails> GetDocumentDetailsByIdAsync(int id);
     }
 }
