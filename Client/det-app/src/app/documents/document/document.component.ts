@@ -4,6 +4,7 @@ import { catchError, of } from "rxjs";
 import { EffectsContainer } from "src/app/shared/effectsContainer";
 import { TderaDocumentItem } from "../documentItem";
 import { DocumentsService } from "../documents.service";
+import { DocumentGridSource } from "./gridSource";
 
 enum DocumentComponentView {
   none = 0,
@@ -23,8 +24,8 @@ export class DocumentComponent {
 
   private id: number
 
-  items = new Array<TderaDocumentItem>();
-  selectedItems = new Array<TderaDocumentItem>();
+  itemsSource = new DocumentGridSource<TderaDocumentItem>();
+  selectedItemsSource = new DocumentGridSource<TderaDocumentItem>();
 
   get areItemsShown() {
     return this.view == DocumentComponentView.documents
@@ -46,23 +47,19 @@ export class DocumentComponent {
   }
 
   onItemAdd = (e: any) => {
-    const item: TderaDocumentItem = e.itemData;
-    this.items = [...this.items, item];
+    this.itemsSource.add(e.itemData);
   }
 
   onItemRemove = (e: any) => {
-    const targetItem: TderaDocumentItem = e.itemData;
-    this.items = this.items.filter(item => item != targetItem);
+    this.itemsSource.remove(e.itemData);
   }
 
   onSelectedItemAdd = (e: any) => {
-    const item: TderaDocumentItem = e.itemData;
-    this.selectedItems = [...this.selectedItems, item];
+    this.selectedItemsSource.add(e.itemData);
   }
 
   onSelectedItemRemove = (e: any) => {
-    const targetItem: TderaDocumentItem = e.itemData;
-    this.selectedItems = this.selectedItems.filter(item => item != targetItem);
+    this.selectedItemsSource.remove(e.itemData);
   }
 
   loadItems() {
@@ -74,9 +71,10 @@ export class DocumentComponent {
           .pipe(catchError(() => of(undefined)))
           .subscribe(details => {
             if (details != undefined) {
-              this.items = details.data2;
+              this.itemsSource.load(details.data2);
               this.view = DocumentComponentView.documents;
             } else {
+              this.itemsSource.load([]);
               this.view = DocumentComponentView.message;
             }
 

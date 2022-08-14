@@ -5,11 +5,11 @@
   </div>
 
   <div class="app-document__grids" *ngIf="areItemsShown">
-    <dx-data-grid [dataSource]="items" [focusedRowEnabled]="true" keyExpr="id_pos">
+    <dx-data-grid [dataSource]="itemsSource.items" [focusedRowEnabled]="true" keyExpr="id_pos">
       <dxo-row-dragging group="documentGrid" [onAdd]="onItemAdd" [onRemove]="onItemRemove"></dxo-row-dragging>
     </dx-data-grid>
 
-    <dx-data-grid [dataSource]="selectedItems" [focusedRowEnabled]="true" keyExpr="id_pos">
+    <dx-data-grid [dataSource]="selectedItemsSource.items" [focusedRowEnabled]="true" keyExpr="id_pos">
       <dxo-row-dragging group="documentGrid" [onAdd]="onSelectedItemAdd" [onRemove]="onSelectedItemRemove"></dxo-row-dragging>
     </dx-data-grid>
   </div>
