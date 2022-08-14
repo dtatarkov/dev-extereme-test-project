@@ -1,8 +1,9 @@
 import { Component } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { catchError, of } from "rxjs";
+import { catchError, of, retry } from "rxjs";
 import { EffectsContainer } from "src/app/shared/effectsContainer";
 import { GridSource } from "src/app/shared/gridSource";
+import { environment } from "src/environments/environment";
 import { TderaDocumentItem } from "../documentItem";
 import { DocumentsService } from "../documents.service";
 
@@ -68,7 +69,7 @@ export class DocumentComponent {
         this.isLoadingDetails = true;
 
         const subscription = this.documentsService.getDocumentDetails(this.id)
-          .pipe(catchError(() => of(undefined)))
+          .pipe(retry(environment.retryCount), catchError(() => of(undefined)))
           .subscribe(details => {
             if (details != undefined) {
               this.itemsSource.load(details.data2);

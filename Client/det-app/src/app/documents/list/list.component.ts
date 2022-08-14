@@ -1,7 +1,8 @@
 import { Component } from "@angular/core";
 import { Router } from "@angular/router";
-import { catchError, of } from "rxjs";
+import { catchError, of, retry } from "rxjs";
 import { EffectsContainer } from "src/app/shared/effectsContainer";
+import { environment } from "src/environments/environment";
 import { TderaDocument } from "../document";
 import { DocumentsService } from "../documents.service";
 
@@ -51,12 +52,13 @@ export class DocumentsListComponent {
         this.isLoadingDocuments = true;
 
         const subscription = this.documentsService.getDocuments()
-          .pipe(catchError(() => of(undefined)))
+          .pipe(retry(environment.retryCount), catchError(() => of(undefined)))
           .subscribe(documents => {
             if (documents != undefined) {
               this.documents = documents;
               this.view = DocumentsListComponentView.documents;
             } else {
+              this.documents = [];
               this.view = DocumentsListComponentView.message;
             }
             

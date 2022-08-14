@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiEndpoint: 'https://localhost:44337'
+  apiEndpoint: 'https://localhost:44337',
+  retryCount: 3
 };
 
 /*
