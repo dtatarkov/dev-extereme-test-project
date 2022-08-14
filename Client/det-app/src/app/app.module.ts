@@ -1,23 +1,23 @@
-import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { DxDataGridModule } from 'devextreme-angular';
+import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { DocumentsService } from './documents/documents.service';
-import { DocumentsListComponent } from './documents/list/list.component';
+
+const routes: Routes = [
+  { path: 'Home/DocumentsList', loadChildren: async () => (await import('./documents/list/list.module')).DocumentsListModule },
+  { path: '', redirectTo: '/Home/DocumentsList', pathMatch: 'full' }
+];
 
 @NgModule({
   declarations: [
-    AppComponent,
-    DocumentsListComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
-    HttpClientModule,
-    DxDataGridModule    
+    RouterModule.forRoot(routes)
   ],
-  providers: [DocumentsService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
