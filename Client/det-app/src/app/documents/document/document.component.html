@@ -1,0 +1,10 @@
+<div class="app-document__body" *ngIf="isReady">
+  <div class="app-document__alert alert alert-warning" role="alert" *ngIf="isMessageShown">
+    <span>Document loading error!</span>
+    <button type="button" class="btn btn-primary btn-sm" (click)="loadItems()">Click here to try again!</button>
+  </div>
+
+  <dx-data-grid [dataSource]="items" keyExpr="id_pos" *ngIf="areItemsShown"></dx-data-grid>
+</div>
+
+<div class="app-document__spinner spinner-border text-primary" role="status" *ngIf="!isReady"></div>

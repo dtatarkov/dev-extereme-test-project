@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 
 const routes: Routes = [
   { path: 'documents/list', loadChildren: async () => (await import('./documents/list/list.module')).DocumentsListModule },
+  { path: 'documents/:id', loadChildren: async () => (await import('./documents/document/document.module')).DocumentModule },
   { path: '', redirectTo: '/documents/list', pathMatch: 'full' }
 ];
 

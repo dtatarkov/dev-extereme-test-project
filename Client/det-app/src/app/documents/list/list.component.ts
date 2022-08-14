@@ -1,4 +1,5 @@
 import { Component } from "@angular/core";
+import { Router } from "@angular/router";
 import { catchError, of } from "rxjs";
 import { EffectsContainer } from "src/app/shared/effectsContainer";
 import { TderaDocument } from "../document";
@@ -34,7 +35,15 @@ export class DocumentsListComponent {
     return !this.isLoadingDocuments;
   }
 
-  constructor(private documentsService: DocumentsService) { }
+  constructor(
+    private documentsService: DocumentsService,
+    private router: Router
+  ) { }
+
+  onCellDbClick(event: Event) {
+    const document: TderaDocument = (<any>event).data;
+    this.navigateToDocument(document.id_record);
+  }  
 
   loadDocuments() {
     if (!this.isLoadingDocuments) {
@@ -66,5 +75,9 @@ export class DocumentsListComponent {
 
   ngOnDestroy() {
     this.effects.dispose();
+  }
+
+  private navigateToDocument(id: number) {
+    this.router.navigate(['/', 'documents', id]);
   }
 }

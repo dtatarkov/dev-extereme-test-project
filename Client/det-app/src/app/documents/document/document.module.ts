@@ -4,16 +4,15 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DxDataGridModule } from 'devextreme-angular';
 import { DocumentsService } from '../documents.service';
-
-import { DocumentsListComponent } from './list.component';
+import { DocumentComponent } from './document.component';
 
 const routes: Routes = [
-  { path: '', component: DocumentsListComponent }
+  { path: '', component: DocumentComponent }
 ]
 
 @NgModule({
   declarations: [
-    DocumentsListComponent
+    DocumentComponent
   ],
 
   imports: [
@@ -24,6 +23,6 @@ const routes: Routes = [
   ],
 
   providers: [DocumentsService],
-  bootstrap: [DocumentsListComponent]
+  bootstrap: [DocumentComponent]
 })
-export class DocumentsListModule { }
+export class DocumentModule { }

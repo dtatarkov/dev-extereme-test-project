@@ -4,7 +4,7 @@
     <button type="button" class="btn btn-primary btn-sm" (click)="loadDocuments()">Click here to try again!</button>
   </div>
 
-  <dx-data-grid [dataSource]="documents" keyExpr="id_record" *ngIf="areDocumentsShown"></dx-data-grid>
+  <dx-data-grid [dataSource]="documents" (onCellDblClick)='onCellDbClick($event)' keyExpr="id_record" *ngIf="areDocumentsShown"></dx-data-grid>
 </div>
 
 <div class="app-documents-list__spinner spinner-border text-primary" role="status" *ngIf="!isReady"></div>

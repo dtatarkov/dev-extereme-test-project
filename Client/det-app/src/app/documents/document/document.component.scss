@@ -1,0 +1,18 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+}
+
+.app-document__body {
+}
+
+.app-document__spinner {
+  align-self: center;
+}
+
+.app-document__alert {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
