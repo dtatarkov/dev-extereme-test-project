@@ -5,12 +5,30 @@
   </div>
 
   <div class="app-document__grids" *ngIf="areItemsShown">
-    <dx-data-grid [dataSource]="itemsSource.items" [focusedRowEnabled]="true" keyExpr="id_pos">
+    <dx-data-grid [dataSource]="itemsSource.items" keyExpr="id_pos" [focusedRowEnabled]="true">
       <dxo-row-dragging group="documentGrid" [onAdd]="onItemAdd" [onRemove]="onItemRemove"></dxo-row-dragging>
+
+      <dxi-column dataField="pos_number" caption="Position" dataType="number" [width]="70"></dxi-column>
+      <dxi-column dataField="good_qty" caption="Quantity" dataType="number" [width]="70"></dxi-column>
+      <dxi-column dataField="pos_name" caption="Name" dataType="number"></dxi-column>
+      <dxi-column dataField="pos_category_name" caption="Category" dataType="string"></dxi-column>
+      <dxi-column dataField="pos_group_name" caption="Group" dataType="string"></dxi-column>
+      <dxi-column dataField="pos_type" caption="Type" dataType="string"></dxi-column>
+      <dxi-column dataField="top_500" caption="Top 500" dataType="number" [width]="70"></dxi-column>
+      <dxi-column dataField="is_certificate" caption="Is Certificate" dataType="number" [width]="100"></dxi-column>
     </dx-data-grid>
 
     <dx-data-grid [dataSource]="selectedItemsSource.items" keyExpr="id_pos" [focusedRowEnabled]="true">
       <dxo-row-dragging group="documentGrid" [onAdd]="onSelectedItemAdd" [onRemove]="onSelectedItemRemove"></dxo-row-dragging>
+
+      <dxi-column dataField="pos_number" caption="Position" dataType="number" [width]="70"></dxi-column>
+      <dxi-column dataField="good_qty" caption="Quantity" dataType="number" [width]="70"></dxi-column>
+      <dxi-column dataField="pos_name" caption="Name" dataType="number"></dxi-column>
+      <dxi-column dataField="pos_category_name" caption="Category" dataType="string"></dxi-column>
+      <dxi-column dataField="pos_group_name" caption="Group" dataType="string"></dxi-column>
+      <dxi-column dataField="pos_type" caption="Type" dataType="string"></dxi-column>
+      <dxi-column dataField="top_500" caption="Top 500" dataType="number" [width]="70"></dxi-column>
+      <dxi-column dataField="is_certificate" caption="Is Certificate" dataType="number" [width]="100"></dxi-column>
     </dx-data-grid>
   </div>
 </div>

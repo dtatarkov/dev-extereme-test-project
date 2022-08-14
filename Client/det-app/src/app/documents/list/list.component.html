@@ -4,7 +4,14 @@
     <button type="button" class="btn btn-primary btn-sm" (click)="loadDocuments()">Click here to try again!</button>
   </div>
 
-  <dx-data-grid [dataSource]="documents" (onCellDblClick)='onCellDbClick($event)' keyExpr="id_record" [focusedRowEnabled]="true" *ngIf="areDocumentsShown"></dx-data-grid>
+  <dx-data-grid [dataSource]="documents" (onCellDblClick)='onCellDbClick($event)' keyExpr="id_record" [focusedRowEnabled]="true" *ngIf="areDocumentsShown">
+    <dxo-filter-row visible="true" applyFilter="Immediately"></dxo-filter-row>
+    <dxo-header-filter visible="true"></dxo-header-filter>
+    <dxi-column dataField="id_pos" caption="Position" dataType="number"></dxi-column>
+    <dxi-column dataField="id_record" caption="ID" dataType="number"></dxi-column>
+    <dxi-column dataField="nom_route" caption="Route" dataType="number"></dxi-column>
+    <dxi-column dataField="nom_zak" caption="Order" dataType="number"></dxi-column>
+  </dx-data-grid>
 </div>
 
 <div class="app-documents-list__spinner spinner-border text-primary" role="status" *ngIf="!isReady"></div>
