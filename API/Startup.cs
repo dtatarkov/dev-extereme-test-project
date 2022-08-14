@@ -11,21 +11,20 @@ namespace API
 {
     public class Startup
     {
+        private readonly IConfiguration configuration;
+
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            this.configuration = configuration;
         }
-
-        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddControllers();
 
             services.AddSingleton(services => new HttpClient());
-            services.AddSingleton(services => new AppSettings(Configuration));
+            services.AddSingleton(services => new AppSettings(configuration));
             services.AddSingleton<IEncoderFactory, EncoderFactory>();
 
             services.AddScoped<IDocumentsService, DocumentsService>();
@@ -50,5 +49,7 @@ namespace API
                 endpoints.MapControllers();
             });
         }
+
+        
     }
 }
