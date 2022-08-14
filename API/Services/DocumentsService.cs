@@ -15,14 +15,14 @@ namespace API.Services
     {
         private readonly AppSettings appSettings;
         private readonly HttpClient httpClient;
-        private readonly ILogger logger;
         private readonly IBase64Service base64Service;
+        private readonly ILogger<DocumentsService> logger;
 
         public DocumentsService(
             AppSettings appSettings, 
             HttpClient httpClient,
             IBase64Service base64Service,
-            ILogger logger)
+            ILogger<DocumentsService> logger)
         {
             this.appSettings = appSettings;
             this.httpClient = httpClient;
@@ -54,7 +54,7 @@ namespace API.Services
             catch (Exception ex)
             {
                 logger.LogError("Tdera API documents loading error", ex.Message);
-                return Enumerable.Empty<TderaDocument>();
+                throw;
             }
         }
 
