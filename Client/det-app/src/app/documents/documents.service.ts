@@ -7,7 +7,7 @@ import { TderaDocument } from "./document";
 export class DocumentsService {
   constructor(private http: HttpClient) { }
 
-  async getDocuments() {
+  getDocuments() {
     return this.http.get<TderaDocument[]>(`${environment.apiEndpoint}/api/v1/documents`);
   }
 }

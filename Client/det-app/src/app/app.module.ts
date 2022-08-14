@@ -1,8 +1,10 @@
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { DxDataGridModule } from 'devextreme-angular';
 
 import { AppComponent } from './app.component';
+import { DocumentsService } from './documents/documents.service';
 import { DocumentsListComponent } from './documents/list/list.component';
 
 @NgModule({
@@ -12,9 +14,10 @@ import { DocumentsListComponent } from './documents/list/list.component';
   ],
   imports: [
     BrowserModule,
-    DxDataGridModule
+    HttpClientModule,
+    DxDataGridModule    
   ],
-  providers: [],
+  providers: [DocumentsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

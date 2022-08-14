@@ -1,8 +1,7 @@
 import { Component } from "@angular/core";
-
-interface Document {
-  id: string
-}
+import { EffectsContainer } from "src/app/shared/effectsContainer";
+import { TderaDocument } from "../document";
+import { DocumentsService } from "../documents.service";
 
 @Component({
   selector: 'app-documents-list',
@@ -10,9 +9,23 @@ interface Document {
   styleUrls: ['./list.component.scss']
 })
 export class DocumentsListComponent {
-  documents = new Array<Document>();
+  private effects = new EffectsContainer();
 
-  constructor() {
+  documents = new Array<TderaDocument>();
 
+  constructor(private documentsService: DocumentsService) { }
+
+  ngOnInit() {
+    this.effects.registerFactory(() => {
+      const subscription = this.documentsService.getDocuments().subscribe(documents => {
+        this.documents = documents
+      });
+
+      return { dispose: () => subscription.unsubscribe() };
+    });    
+  }
+
+  ngOnDestroy() {
+    this.effects.dispose();
   }
 }
