@@ -51,13 +51,9 @@ namespace Client
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
-                    name: "home",
-                    pattern: "Home/{*path}",
-                    defaults: new { controller = "Home", action = "Index" });
-
-                endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{*path}",
+                    defaults: new { controller = "Home", action = "Index" });
             });
         }
     }

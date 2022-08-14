@@ -5,8 +5,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 
 const routes: Routes = [
-  { path: 'Home/DocumentsList', loadChildren: async () => (await import('./documents/list/list.module')).DocumentsListModule },
-  { path: '', redirectTo: '/Home/DocumentsList', pathMatch: 'full' }
+  { path: 'documents/list', loadChildren: async () => (await import('./documents/list/list.module')).DocumentsListModule },
+  { path: '', redirectTo: '/documents/list', pathMatch: 'full' }
 ];
 
 @NgModule({
